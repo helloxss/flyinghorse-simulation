@@ -106,17 +106,17 @@
 
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 TIME_DIR := $(patsubst %/unit_test/timetest/Makefile, %, $(MKFILE_PATH))
-SIRIUS_HOME = $(patsubst %/models/math, %, $(TIME_DIR))
+SIM_HOME = $(patsubst %/models/math, %, $(TIME_DIR))
 $(info MKFILE_PATH = $(MKFILE_PATH))
 $(info TIME_PATH = $(TIME_DIR))
-$(info SIRIUS_HOME = $(SIRIUS_HOME))
+$(info SIM_HOME = $(SIM_HOME))
 ###### C flags #####
 CC = gcc
 CFLAGS = -Wall -g -lm -std=c11
-CFLAGS += -I$(SIRIUS_HOME)/models/math/include
+CFLAGS += -I$(SIM_HOME)/models/math/include
 ##### C Source #####
-TIME_C_SOURCE = $(SIRIUS_HOME)/models/math/src/time_utility_c.c
-TIME_TEST_C_SOURCE = $(SIRIUS_HOME)/models/math/unit_test/timetest/timeunit.c
+TIME_C_SOURCE = $(SIM_HOME)/models/math/src/time_utility_c.c
+TIME_TEST_C_SOURCE = $(SIM_HOME)/models/math/unit_test/timetest/timeunit.c
 ##### OBJECTS #####
 TIME_OBJECTS += $(patsubst %.c, %.o, $(TIME_C_SOURCE))
 TIME_OBJECTS += $(patsubst %.c, %.o, $(TIME_TEST_C_SOURCE))

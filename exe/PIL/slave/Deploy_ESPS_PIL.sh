@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 SCRIPT_FILE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-SIRIUS_HOME_PATH=$(echo $SCRIPT_FILE_DIR | sed 's/\/exe\/PIL\/slave//g')
+SIM_HOME_PATH=$(echo $SCRIPT_FILE_DIR | sed 's/\/exe\/PIL\/slave//g')
 S_DEFINE_PATH=$SCRIPT_FILE_DIR
 ##### Variable #####
 if [ -z $1 ]; then
@@ -19,9 +19,9 @@ else
 fi
 
 ##### FUNCTION #####
-source $SIRIUS_HOME_PATH/exe/xil_common/script/text_process_func.sh
+source $SIM_HOME_PATH/exe/xil_common/script/text_process_func.sh
 #####  Set up communication IP   #####
-sed_ipaddr_subst $EGSE_IP "$SIRIUS_HOME_PATH/models/icf/include/icf_trx_ctrl.h"
+sed_ipaddr_subst $EGSE_IP "$SIM_HOME_PATH/models/icf/include/icf_trx_ctrl.h"
 ##### Generate the image#####
 cd $S_DEFINE_PATH
 trick-CP

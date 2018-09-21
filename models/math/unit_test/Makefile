@@ -106,25 +106,25 @@
 
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 MATH_DIR := $(patsubst %/unit_test/Makefile, %, $(MKFILE_PATH))
-SIRIUS_HOME = $(patsubst %/models/math, %, $(MATH_DIR))
+SIM_HOME = $(patsubst %/models/math, %, $(MATH_DIR))
 $(info MKFILE_PATH = $(MKFILE_PATH))
 $(info MATH_PATH = $(MATH_DIR))
-$(info SIRIUS_HOME = $(SIRIUS_HOME))
+$(info SIM_HOME = $(SIM_HOME))
 ###### CXX flags #####
 CXX = g++
 CXXFLAGS = -Wall -g -lgsl -lgslcblas -lm -larmadillo --std=c++11 -lstdc++
-CXXFLAGS += -I$(SIRIUS_HOME)/models/math/include\
-		  -I$(SIRIUS_HOME)/models/cad/include
+CXXFLAGS += -I$(SIM_HOME)/models/math/include\
+		  -I$(SIM_HOME)/models/cad/include
 ###### C flags #####
 CC = gcc
 CFLAGS = -Wall -g -lm -std=c11
-CFLAGS += -I$(SIRIUS_HOME)/models/math/include
+CFLAGS += -I$(SIM_HOME)/models/math/include
 ##### CPP Source #####
-MATH_CPP_SOURCES += $(SIRIUS_HOME)/models/math/src/matrix/utility.cpp
+MATH_CPP_SOURCES += $(SIM_HOME)/models/math/src/matrix/utility.cpp
 MATH_TEST_CPP_SOURCES += $(MATH_DIR)/unit_test/mathunit.cpp
 ##### C Source #####
-MATH_C_SOURCE = $(SIRIUS_HOME)/models/math/src/math_utility_c.c
-MATH_C_SOURCE += $(SIRIUS_HOME)/models/cad/src/global_constants.c
+MATH_C_SOURCE = $(SIM_HOME)/models/math/src/math_utility_c.c
+MATH_C_SOURCE += $(SIM_HOME)/models/cad/src/global_constants.c
 ##### OBJECTS #####
 MATH_OBJECTS += $(patsubst %.cpp, %.o, $(MATH_TEST_CPP_SOURCES))
 MATH_OBJECTS += $(patsubst %.cpp, %.o, $(MATH_CPP_SOURCES))
@@ -149,7 +149,7 @@ clean:
 	rm -f  *.o mathtest
 	find $(MATH_DIR)/src -name *.o -type f -delete
 	find $(MATH_DIR)/src/matrix -name *.o -type f -delete
-	find $(SIRIUS_HOME)/models/cad/src -name *.o -type f -delete
+	find $(SIM_HOME)/models/cad/src -name *.o -type f -delete
 	find ../../ -name *.d -type f -delete
 	
 
